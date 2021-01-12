@@ -6,6 +6,7 @@ import flotte.Bateau;
 import flotte.Croiseur;
 import flotte.Escorteur;
 import jeu.Tableau;
+import utilitaire.Message;
 
 public class Lanceur {
 
@@ -22,6 +23,10 @@ public class Lanceur {
 		Bateau b1 = new Croiseur(2, 3, true);
 		
 		Bateau b2 = new Escorteur(7, 3, false);
+		
+		
+		
+		Message.obtenirMessage(0);
 		
 	}
 	
