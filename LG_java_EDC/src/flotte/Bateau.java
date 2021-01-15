@@ -33,7 +33,7 @@ public class Bateau {
 	
 	
 	public static void avancer() {
-		
+		System.out.println("Le bateau avance");
 	}
 	
 	public int estTouche(int pX, int pY) {
