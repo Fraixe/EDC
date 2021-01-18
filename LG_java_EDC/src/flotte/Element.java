@@ -9,11 +9,6 @@ public class Element {
 	private Bateau bateau;
 	private boolean bTouche = false;
 	
-
-
-
-	
-	
 	
 
 

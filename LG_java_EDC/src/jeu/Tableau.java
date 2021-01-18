@@ -1,24 +1,26 @@
 package jeu;
 
 import java.util.Scanner;
+import java.util.Vector;
 
-
-
-import flotte.Bateau;
-import flotte.Croiseur;
-import flotte.Escorteur;
+import flotte.*;
 
 
 public class Tableau {
 	
 	private int colonnes;
 	private int lignes;
+	private int[][] grille;
+	
+	private Vector<Bateau> listeBateau;
+	
+	
 	
 	public Tableau(int lignes, int colonnes) {
 		this.lignes = lignes;
 		this.colonnes = colonnes;
 		
-		int grille[][] = new int[lignes][colonnes];
+		setGrille(new int[lignes][colonnes]);
 		System.out.println("Nombre de lignes :"+this.lignes);
 		System.out.println("Nombre de colonnes :"+this.colonnes);
 	}
@@ -27,7 +29,6 @@ public class Tableau {
 		System.out.println("Effecteur un coup :");
 		Scanner sc = new Scanner(System.in);
 		return 0;
-		
 		
 	}
 	
@@ -56,6 +57,14 @@ public class Tableau {
 		
 		
 		return true;
+	}
+
+	public int[][] getGrille() {
+		return grille;
+	}
+
+	public void setGrille(int[][] grille) {
+		this.grille = grille;
 	}
 	
 	
