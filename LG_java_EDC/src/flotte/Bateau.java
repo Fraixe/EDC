@@ -7,6 +7,7 @@ import flotte.Element;
 public class Bateau {
 	
 	private boolean bHorizontal;
+	private Element[] partieBateau = null;
 	
 	
 	public Bateau(int x, int y, boolean bhorizontal,int taille){
@@ -15,23 +16,22 @@ public class Bateau {
 		this.bHorizontal = bhorizontal;
 		
 		//Création des elements du bateau
-		List<Element> partieBateau = new ArrayList<Element>();
+		this.partieBateau = new Element[taille];
 		
 		//placement du premier element du bateau
-		partieBateau.add(new Element(x, y, this));
 		
 		//boucle pour placer les elements suivant selon si le bateau est horizontal ou vertical
-		for(int i = 1; i < taille; i++) {
+		for(int i = 0; i < taille; i++) {
 			if (bhorizontal)
-				partieBateau.add(new Element(x, y+i, this));
+				this.partieBateau[i] = new Element(x, y+i, this);
 			else
-				partieBateau.add(new Element(x+i, y, this));
+				this.partieBateau[i] = new Element(x+i, y, this);
 		}
 		
 	}
 	
-	
-	
+
+
 	public static void avancer() {
 		System.out.println("Le bateau avance");
 	}

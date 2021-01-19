@@ -20,7 +20,13 @@ public class Element {
 	}
 	
 	public int estTouche(int pX,int pY) {
-		return 0;
+		int resultat= (Integer) null;
+		
+		if((getPositionX() == pX)&&(getPositionY() == pY))
+			resultat = 2;
+		
+		System.out.println(resultat);
+		return resultat;
 	}
 	
 	public  void avancer(int depX, int depY) {
