@@ -10,15 +10,26 @@ public class Bateau {
 	private Element[] partieBateau = null;
 	
 	
+	
+	public Element[] getPartieBateau() {
+		return partieBateau;
+	}
+
+
+
+	public void setPartieBateau(Element[] partieBateau) {
+		this.partieBateau = partieBateau;
+	}
+
+
+
 	public Bateau(int x, int y, boolean bhorizontal,int taille){
 		
 		//Sauvegarde en variable de bHorizontal
-		this.bHorizontal = bhorizontal;
+		this.setbHorizontal(bhorizontal);
 		
 		//Création des elements du bateau
 		this.partieBateau = new Element[taille];
-		
-		//placement du premier element du bateau
 		
 		//boucle pour placer les elements suivant selon si le bateau est horizontal ou vertical
 		for(int i = 0; i < taille; i++) {
@@ -38,6 +49,18 @@ public class Bateau {
 	
 	public int estTouche(int pX, int pY) {
 		return 0;
+	}
+
+
+
+	public boolean isbHorizontal() {
+		return bHorizontal;
+	}
+
+
+
+	public void setbHorizontal(boolean bHorizontal) {
+		this.bHorizontal = bHorizontal;
 	}
 
 }

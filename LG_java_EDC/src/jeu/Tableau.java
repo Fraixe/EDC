@@ -7,12 +7,13 @@ import flotte.*;
 
 
 public class Tableau {
+	static final int OCCUPE = 1;
 	
 	private int colonnes;
 	private int lignes;
 	private int[][] grille;
 	
-	private Vector<Bateau> listeBateau;
+	private static Vector<Bateau> listeBateau;
 	
 	
 	
@@ -23,6 +24,8 @@ public class Tableau {
 		setGrille(new int[lignes][colonnes]);
 		System.out.println("Nombre de lignes :"+this.lignes);
 		System.out.println("Nombre de colonnes :"+this.colonnes);
+		
+		listeBateau = new Vector<Bateau>();
 	}
 	
 	public static int effectuerCoup(int pX, int pY) {
@@ -32,17 +35,27 @@ public class Tableau {
 		
 	}
 	
-	public static boolean ajouterBateau(Bateau b) {
-		System.out.println("Ajoutez un bateau");
+	public boolean ajouterBateau(Bateau b) {
+		int x = b.getPartieBateau()[0].getPositionX();
+		int y = b.getPartieBateau()[0].getPositionY();
+		boolean bHorizontal = b.isbHorizontal();
 		
-//		if (taille == 2) {
-//			this.bHorizontal = bhorizontal;
-//			Croiseur croiseur = new Croiseur(x, y, bhorizontal);
-//		} 
-//		if (taille == 3) {
-//			this.bHorizontal = bhorizontal;
-//			Escorteur escorteur = new Escorteur(x, y, bhorizontal);
-//		}
+		for (int i = 0; i < b.getPartieBateau().length; i++) {
+			if (bHorizontal)
+				getGrille()[x][y+i] = OCCUPE;
+			else
+				getGrille()[x+i][y] = OCCUPE;
+		}
+			
+
+		System.out.println(getGrille()[x][y]);
+		System.out.println(getGrille()[x][y+1]);
+		
+		System.out.println("Bateau ajouté !");
+		
+		
+		listeBateau.add(b);
+		
 		
 		return true;
 	}
@@ -66,6 +79,7 @@ public class Tableau {
 	public void setGrille(int[][] grille) {
 		this.grille = grille;
 	}
-	
+
+
 	
 }

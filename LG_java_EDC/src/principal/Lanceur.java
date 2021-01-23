@@ -25,25 +25,15 @@ public class Lanceur {
 		Bateau b2 = new Escorteur(7, 3, false);
 		
 		
+		tableau.ajouterBateau(b1);
 		
-		Message.obtenirMessage(0);
+		
+		
+		 
+		
+		//Message.obtenirMessage(0);
 		
 	}
 	
-	// Retourner une valeur saisie
-	public static int saisirValeur(String p_texte) {	
-
-		// Cr�ation d'un objet Scanner permettant la saisie au clavier
-		Scanner sc = new Scanner(System.in);
-
-		// Affichage du texte
-		System.out.print("\n" + p_texte);
-
-		// Attendre la saisie et stocker la valeur dans valeurEntree
-		int valeurEntree = sc.nextInt();
-
-		// Retourner la valeur sous forme d'une String
-		return valeurEntree;
-	}
 
 }
