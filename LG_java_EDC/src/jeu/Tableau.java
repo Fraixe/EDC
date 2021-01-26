@@ -36,6 +36,7 @@ public class Tableau {
 	}
 	
 	//Récupère les positions X et Y + si le bateau est vertical ou horizontal
+	//
 	public boolean ajouterBateau(Bateau b) {
 		int x = b.getPartieBateau()[0].getPositionX();
 		int y = b.getPartieBateau()[0].getPositionY();
@@ -43,6 +44,8 @@ public class Tableau {
 
 
 
+		// Si le bateau à placer est sur un autre bateau déjà présent sur la grille
+		//On ne place pas le bateau (return false)
 		if (isBateauSuperpose(b)) {
 			for (int i = 0; i < b.getPartieBateau().length; i++) {
 				if (bHorizontal)
@@ -76,6 +79,16 @@ public class Tableau {
 	
 	//Check si le bateau qu'on placer se superpose avec un bateau déjà placés
 	private boolean isBateauSuperpose(Bateau b) {
+		int x;
+		int y;
+		
+		for (int i = 0; i < b.getPartieBateau().length; i++) {
+			x = b.getPartieBateau()[i].getPositionX();
+			y =	b.getPartieBateau()[i].getPositionY();
+			
+			if (getGrille()[x][y] == OCCUPE)
+				return false;
+		}
 		
 		
 		return true;
