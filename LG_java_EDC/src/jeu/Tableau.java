@@ -35,35 +35,44 @@ public class Tableau {
 		
 	}
 	
+	//Récupère les positions X et Y + si le bateau est vertical ou horizontal
 	public boolean ajouterBateau(Bateau b) {
 		int x = b.getPartieBateau()[0].getPositionX();
 		int y = b.getPartieBateau()[0].getPositionY();
 		boolean bHorizontal = b.isbHorizontal();
-		
-		for (int i = 0; i < b.getPartieBateau().length; i++) {
-			if (bHorizontal)
-				getGrille()[x][y+i] = OCCUPE;
-			else
-				getGrille()[x+i][y] = OCCUPE;
-		}
-			
 
-		System.out.println(getGrille()[x][y]);
-		System.out.println(getGrille()[x][y+1]);
-		
-		System.out.println("Bateau ajouté !");
-		
-		
-		listeBateau.add(b);
-		
-		
-		return true;
+
+
+		if (isBateauSuperpose(b)) {
+			for (int i = 0; i < b.getPartieBateau().length; i++) {
+				if (bHorizontal)
+					getGrille()[x][y+i] = OCCUPE;
+				else
+					getGrille()[x+i][y] = OCCUPE;
+			}
+
+
+			System.out.println(getGrille()[x][y]);
+			System.out.println(getGrille()[x][y+1]);
+
+			System.out.println("Bateau ajouté !");
+
+
+			listeBateau.add(b);
+
+			return true;
+		} else
+			return false;
 	}
 
 	//Quand tout les éléments du bateau sont touchés, on le retire du jeu
 	public static boolean enleverBateau(Bateau b) {
+		
+		listeBateau.remove(b);
 		return true;
 	}
+	
+	
 	
 	//Check si le bateau qu'on placer se superpose avec un bateau déjà placés
 	private boolean isBateauSuperpose(Bateau b) {
@@ -72,6 +81,10 @@ public class Tableau {
 		return true;
 	}
 
+	
+	
+	
+	//Getter et Setter de la grille
 	public int[][] getGrille() {
 		return grille;
 	}
