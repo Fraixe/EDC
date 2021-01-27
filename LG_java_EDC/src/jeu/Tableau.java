@@ -71,8 +71,15 @@ public class Tableau {
 	//Quand tout les éléments du bateau sont touchés, on le retire du jeu
 	public static boolean enleverBateau(Bateau b) {
 		
-		listeBateau.remove(b);
-		return true;
+		if (listeBateau.contains(b)) {
+			
+		
+			listeBateau.remove(b);
+			b = null;
+			return true;
+		}
+		System.out.println("Bateau déjà enlevé");
+		return false;
 	}
 	
 	//test
@@ -89,8 +96,6 @@ public class Tableau {
 			if (getGrille()[x][y] == OCCUPE)
 				return false;
 		}
-		
-		
 		return true;
 	}
 
