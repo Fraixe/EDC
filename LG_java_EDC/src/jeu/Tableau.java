@@ -75,7 +75,7 @@ public class Tableau {
 		return true;
 	}
 	
-	
+	//test
 	
 	//Check si le bateau qu'on placer se superpose avec un bateau déjà placés
 	private boolean isBateauSuperpose(Bateau b) {
