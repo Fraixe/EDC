@@ -21,9 +21,10 @@ public class Element {
 	
 	public int estTouche(int pX,int pY) {
 		if (!bTouche) {
-			if((getPositionX() == pX)&&(getPositionY() == pY)) 
-				return  Message.COUPSURELEMENTTOUCHEPREM;	
-			else
+			if((getPositionX() == pX)&&(getPositionY() == pY)) {
+				bTouche = true;
+				return  Message.COUPSURELEMENTTOUCHEPREM;
+			}else
 				return Message.COUPDANSEAU;
 		}
 		return Message.COUPSURELEMENTTOUCHE;

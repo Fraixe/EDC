@@ -3,12 +3,13 @@ package flotte;
 import java.util.ArrayList;
 import java.util.List;
 import flotte.Element;
+import utilitaire.Message;
 
 public class Bateau {
 	
 	private boolean bHorizontal;
 	private Element[] partieBateau = null;
-	
+	private int compteur = 0;
 	
 	
 	public Element[] getPartieBateau() {
@@ -48,7 +49,20 @@ public class Bateau {
 	}
 	
 	public int estTouche(int pX, int pY) {
-		return 0;
+		int resultat;
+
+		for (int i=0; i < partieBateau.length; i++) {
+			resultat = partieBateau[i].estTouche(pX, pY);
+			if (resultat == Message.COUPSURELEMENTTOUCHE)
+				return resultat;
+			if (resultat == Message.COUPSURELEMENTTOUCHEPREM)
+				compteur++;
+				if (compteur == partieBateau.length)
+					return resultat = Message.COUPSURBATEAUCOULE;
+				
+				return resultat; // retourne COUPSURELEMENTTOUCHEPREM
+		}
+		return Message.COUPDANSEAU;
 	}
 
 

@@ -4,34 +4,38 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import flotte.*;
+import utilitaire.Message;
 
 
 public class Tableau {
 	static final int OCCUPE = 1;
 	
-	private int colonnes;
-	private int lignes;
+	private static int lignes;
+	private static int colonnes;
+
 	private int[][] grille;
 	
 	private static Vector<Bateau> listeBateau;
 	
 	
 	
+	@SuppressWarnings("static-access")
 	public Tableau(int lignes, int colonnes) {
 		this.lignes = lignes;
 		this.colonnes = colonnes;
 		
 		setGrille(new int[lignes][colonnes]);
-		System.out.println("Nombre de lignes :"+this.lignes);
-		System.out.println("Nombre de colonnes :"+this.colonnes);
+
 		
 		listeBateau = new Vector<Bateau>();
 	}
 	
 	public static int effectuerCoup(int pX, int pY) {
-		System.out.println("Effecteur un coup :");
-		Scanner sc = new Scanner(System.in);
-		return 0;
+		if ((pX < 1 || pX > lignes)&&(pY < 1 || pY > colonnes))
+			return Message.COUPENDEHORSDUTABLEAU;
+		
+		A CODER
+			
 		
 	}
 	
@@ -66,6 +70,7 @@ public class Tableau {
 			return false;
 	}
 
+	
 	//Quand tout les éléments du bateau sont touchés, on le retire du jeu
 	public  boolean enleverBateau(Bateau b) {
 		
@@ -82,7 +87,6 @@ public class Tableau {
 		return false;
 	}
 	
-	//test
 	
 	//Check si le bateau qu'on placer se superpose avec un bateau déjà placés
 	private boolean isBateauSuperpose(Bateau b) {
