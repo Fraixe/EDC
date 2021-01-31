@@ -54,14 +54,12 @@ public class Tableau {
 					getGrille()[x+i][y] = OCCUPE;
 			}
 
-
 			System.out.println(getGrille()[x][y]);
 			System.out.println(getGrille()[x][y+1]);
+			
+			listeBateau.add(b);
 
 			System.out.println("Bateau ajouté !");
-
-
-			listeBateau.add(b);
 
 			return true;
 		} else
@@ -69,13 +67,15 @@ public class Tableau {
 	}
 
 	//Quand tout les éléments du bateau sont touchés, on le retire du jeu
-	public static boolean enleverBateau(Bateau b) {
+	public  boolean enleverBateau(Bateau b) {
 		
 		if (listeBateau.contains(b)) {
-			
-		
+
 			listeBateau.remove(b);
 			b = null;
+			System.out.println("Bateau enlevé !");
+			
+			System.out.println(listeBateau.size());
 			return true;
 		}
 		System.out.println("Bateau déjà enlevé");
@@ -93,8 +93,10 @@ public class Tableau {
 			x = b.getPartieBateau()[i].getPositionX();
 			y =	b.getPartieBateau()[i].getPositionY();
 			
-			if (getGrille()[x][y] == OCCUPE)
+			if (getGrille()[x][y] == OCCUPE) {
+				System.out.println("Bateau est superposé !");
 				return false;
+			}	
 		}
 		return true;
 	}

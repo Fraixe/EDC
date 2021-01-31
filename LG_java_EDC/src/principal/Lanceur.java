@@ -27,6 +27,7 @@ public class Lanceur {
 		
 		tableau.ajouterBateau(b1);
 		
+		tableau.ajouterBateau(b1);
 		
 		
 		 

@@ -1,6 +1,6 @@
 package flotte;
 
-
+import utilitaire.Message;
 
 public class Element {
 
@@ -20,14 +20,16 @@ public class Element {
 	}
 	
 	public int estTouche(int pX,int pY) {
-		int resultat= (Integer) null;
-		
-		if((getPositionX() == pX)&&(getPositionY() == pY))
-			resultat = 2;
-		
-		System.out.println(resultat);
-		return resultat;
+		if (!bTouche) {
+			if((getPositionX() == pX)&&(getPositionY() == pY)) 
+				return  Message.COUPSURELEMENTTOUCHEPREM;	
+			else
+				return Message.COUPDANSEAU;
+		}
+		return Message.COUPSURELEMENTTOUCHE;
 	}
+	
+	
 	
 	public  void avancer(int depX, int depY) {
 		 
