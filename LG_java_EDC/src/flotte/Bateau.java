@@ -12,15 +12,7 @@ public class Bateau {
 	private int compteur = 0;
 	
 	
-	public Element[] getPartieBateau() {
-		return partieBateau;
-	}
 
-
-
-	public void setPartieBateau(Element[] partieBateau) {
-		this.partieBateau = partieBateau;
-	}
 
 
 
@@ -67,6 +59,7 @@ public class Bateau {
 
 
 
+	// getter et setter
 	public boolean isbHorizontal() {
 		return bHorizontal;
 	}
@@ -77,4 +70,13 @@ public class Bateau {
 		this.bHorizontal = bHorizontal;
 	}
 
+	public Element[] getPartieBateau() {
+		return partieBateau;
+	}
+
+	public void setPartieBateau(Element[] partieBateau) {
+		this.partieBateau = partieBateau;
+	}
 }
+
+

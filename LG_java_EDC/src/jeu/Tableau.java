@@ -1,6 +1,5 @@
 package jeu;
 
-import java.util.Scanner;
 import java.util.Vector;
 
 import flotte.*;
@@ -24,19 +23,31 @@ public class Tableau {
 		this.lignes = lignes;
 		this.colonnes = colonnes;
 		
-		setGrille(new int[lignes][colonnes]);
+		setGrille(new int[lignes+1][colonnes+1]);
 
 		
 		listeBateau = new Vector<Bateau>();
 	}
 	
 	public static int effectuerCoup(int pX, int pY) {
-		if ((pX < 1 || pX > lignes)&&(pY < 1 || pY > colonnes))
+		int resultat;
+		//controle du coup à jouer
+		if ((pX < 1 || pX > lignes)&&(pY < 1 || pY > colonnes)) {
 			return Message.COUPENDEHORSDUTABLEAU;
-		
-		A CODER
-			
-		
+		}
+		else { 			
+			//fonctionnement normal
+			//boucle parcourant les bateaux
+			for (int i= 0; i < listeBateau.size(); i++){
+				//appel de la fonction estTouche de chaque bateau
+				resultat = listeBateau.elementAt(i).estTouche(pX, pY);
+				//Si le coup touche OU a déjà touché un bateau OU coule un bateau on sort de la boucle et on retourne le bon code
+				if (resultat == Message.COUPSURELEMENTTOUCHE || resultat == Message.COUPSURELEMENTTOUCHEPREM || resultat == Message.COUPSURBATEAUCOULE)
+					return resultat;			
+			}
+		}
+		// renvoi par défaut coup dans eau si le coup n'a pas touché
+		return resultat = Message.COUPDANSEAU;
 	}
 	
 	//Récupère les positions X et Y + si le bateau est vertical ou horizontal
@@ -45,8 +56,6 @@ public class Tableau {
 		int x = b.getPartieBateau()[0].getPositionX();
 		int y = b.getPartieBateau()[0].getPositionY();
 		boolean bHorizontal = b.isbHorizontal();
-
-
 
 		// Si le bateau à placer est sur un autre bateau déjà présent sur la grille
 		//On ne place pas le bateau (return false)
@@ -57,9 +66,6 @@ public class Tableau {
 				else
 					getGrille()[x+i][y] = OCCUPE;
 			}
-
-			System.out.println(getGrille()[x][y]);
-			System.out.println(getGrille()[x][y+1]);
 			
 			listeBateau.add(b);
 
@@ -86,8 +92,7 @@ public class Tableau {
 		System.out.println("Bateau déjà enlevé");
 		return false;
 	}
-	
-	
+
 	//Check si le bateau qu'on placer se superpose avec un bateau déjà placés
 	private boolean isBateauSuperpose(Bateau b) {
 		int x;
@@ -105,9 +110,6 @@ public class Tableau {
 		return true;
 	}
 
-	
-	
-	
 	//Getter et Setter de la grille
 	public int[][] getGrille() {
 		return grille;
