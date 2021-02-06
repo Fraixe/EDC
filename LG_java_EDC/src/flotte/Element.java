@@ -20,14 +20,18 @@ public class Element {
 	}
 	
 	public int estTouche(int pX,int pY) {
+		int resultat;
+		
 		if (!bTouche) {
 			if((getPositionX() == pX)&&(getPositionY() == pY)) {
 				bTouche = true;
-				return  Message.COUPSURELEMENTTOUCHEPREM;
-			}else
-				return Message.COUPDANSEAU;
-		}
-		return Message.COUPSURELEMENTTOUCHE;
+				return resultat = Message.COUPSURELEMENTTOUCHEPREM;
+			}
+		}else if ((bTouche == true && (getPositionX() == pX)&&(getPositionY() == pY)))
+			return resultat = Message.COUPSURELEMENTTOUCHE;
+		
+		resultat = Message.COUPDANSEAU;
+		return resultat ;
 	}
 	
 	

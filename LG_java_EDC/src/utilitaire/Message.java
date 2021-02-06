@@ -32,7 +32,7 @@ public class Message {
 			retourPhrase = ("Bateau touché !");
 			break;
 		case COUPSURBATEAUCOULE:
-			retourPhrase = ("Bateau coulé !");
+			retourPhrase = ("Bateau touché et coulé !");
 			break;
 		default:
 			retourPhrase = ("Cassé");

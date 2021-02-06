@@ -29,10 +29,10 @@ public class Tableau {
 		listeBateau = new Vector<Bateau>();
 	}
 	
-	public static int effectuerCoup(int pX, int pY) {
+	public int effectuerCoup(int pX, int pY) {
 		int resultat;
 		//controle du coup à jouer
-		if ((pX < 1 || pX > lignes)&&(pY < 1 || pY > colonnes)) {
+		if ((pX < 1 || pX > lignes) || (pY < 1 || pY > colonnes)) {
 			return Message.COUPENDEHORSDUTABLEAU;
 		}
 		else { 			
@@ -42,8 +42,13 @@ public class Tableau {
 				//appel de la fonction estTouche de chaque bateau
 				resultat = listeBateau.elementAt(i).estTouche(pX, pY);
 				//Si le coup touche OU a déjà touché un bateau OU coule un bateau on sort de la boucle et on retourne le bon code
-				if (resultat == Message.COUPSURELEMENTTOUCHE || resultat == Message.COUPSURELEMENTTOUCHEPREM || resultat == Message.COUPSURBATEAUCOULE)
-					return resultat;			
+				if (resultat == Message.COUPSURELEMENTTOUCHE || resultat == Message.COUPSURELEMENTTOUCHEPREM )
+					return resultat;
+				
+				if (resultat == Message.COUPSURBATEAUCOULE) {
+					enleverBateau(listeBateau.elementAt(i));
+					return resultat;
+				}
 			}
 		}
 		// renvoi par défaut coup dans eau si le coup n'a pas touché
@@ -85,8 +90,7 @@ public class Tableau {
 			listeBateau.remove(b);
 			b = null;
 			System.out.println("Bateau enlevé !");
-			
-			System.out.println(listeBateau.size());
+
 			return true;
 		}
 		System.out.println("Bateau déjà enlevé");

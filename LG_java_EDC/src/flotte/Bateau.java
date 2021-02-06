@@ -1,8 +1,5 @@
 package flotte;
 
-import java.util.ArrayList;
-import java.util.List;
-import flotte.Element;
 import utilitaire.Message;
 
 public class Bateau {
@@ -40,21 +37,32 @@ public class Bateau {
 		System.out.println("Le bateau avance");
 	}
 	
+	
+	
 	public int estTouche(int pX, int pY) {
 		int resultat;
-
-		for (int i=0; i < partieBateau.length; i++) {
+		
+		for (int i = 0; i < partieBateau.length; i++) {
 			resultat = partieBateau[i].estTouche(pX, pY);
+			
 			if (resultat == Message.COUPSURELEMENTTOUCHE)
 				return resultat;
-			if (resultat == Message.COUPSURELEMENTTOUCHEPREM)
+			
+			if (resultat == Message.COUPSURELEMENTTOUCHEPREM) {
 				compteur++;
-				if (compteur == partieBateau.length)
-					return resultat = Message.COUPSURBATEAUCOULE;
+				if (compteur == partieBateau.length) {
+					resultat = Message.COUPSURBATEAUCOULE;
+					return resultat;
+				}
+				resultat = Message.COUPSURELEMENTTOUCHEPREM;
+				return resultat;
 				
-				return resultat; // retourne COUPSURELEMENTTOUCHEPREM
+			}
 		}
-		return Message.COUPDANSEAU;
+
+		resultat = Message.COUPDANSEAU;
+		return resultat;
+		
 	}
 
 
