@@ -26,7 +26,7 @@ public class Tableau {
 		setGrille(new int[lignes+1][colonnes+1]);
 
 		
-		listeBateau = new Vector<Bateau>();
+		this.listeBateau = new Vector<Bateau>();
 	}
 	
 	public int effectuerCoup(int pX, int pY) {
