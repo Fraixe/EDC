@@ -22,6 +22,7 @@ public class Lanceur {
 		boolean isTailleOK = false;
 		int nombreBateau = 0;
 		boolean isNombreBateauOk = false;
+		boolean isHorizontalBool = false;
 
 		System.out.println("---------Bataille Navale------------");
 
@@ -41,8 +42,10 @@ public class Lanceur {
 		tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\n");
 
 		do {
-			if (tailleGrille < TAILLEMINGRILLE)
+			if (tailleGrille < TAILLEMINGRILLE) {
 				System.out.println("Taille de grille trop petite ! \nTaille minimum :"+ TAILLEMINGRILLE);
+				tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\n");
+			}
 			else 
 				isTailleOK = true;
 		} while (!isTailleOK);
@@ -57,60 +60,89 @@ public class Lanceur {
 		System.out.println("-------------------Mise en place des bateaux-------------------");
 
 
-		do {
+		
 			nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
-
-			if (nombreBateau < NOMBREMINBATEAU ) 
-				System.out.println("Pas assez de bateaux !");
-			else {
+			
+		do {
+			if (nombreBateau < NOMBREMINBATEAU ) {
+				System.out.println("Pas assez de bateaux !\n Nombre de bateaux minimum : "+NOMBREMINBATEAU);
+				nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
+			}else 
 				isNombreBateauOk = true;
-				System.out.println("Nombre de bateaux définis pour les deux joueurs :" + nombreBateau);
-			}
+			
 		} while (!isNombreBateauOk);
+		
+		System.out.println("Nombre de bateaux définis pour les deux joueurs :" + nombreBateau);
 
 		for (int i = 0; i <nombreBateau; i++) {
 			boolean isTypeBateauOk = false;
 			boolean isPositionX_Ok = false;
 			boolean isPositionY_Ok = false;
 
+			int typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
 			do {
-				int typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
-				if (typeBateau < 1 && typeBateau > 3)
+				if (typeBateau < 1 && typeBateau > 3) {
 					System.out.println("Valeur incorrecte ! Veuillez choisir entre 1 et 3");
-				else {
-					switch (typeBateau) {
-					case 1:
-						System.out.println("Croiseur choisi");
-						break;
-					case 2:
-						System.out.println("Escoteur choisi");
-						break;
-					case 3:
-						System.out.println("Sous-marin choisi");
-						break;
-					}
-				isTypeBateauOk = true;
-				}
+					typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
+				}else 
+					isTypeBateauOk = true;
 			} while (!isTypeBateauOk);
 
+			int positionX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
 			do {
-				int positionX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
 				if (positionX < 1 || positionX > tailleGrille) {
 					System.out.println("Valeur en dehors des limites de la grille !");
+					positionX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
 				}else
-					System.out.println("Position du bateau en X: " + positionX);
-				isPositionX_Ok = true;
+					isPositionX_Ok = true;
 			}while (!isPositionX_Ok);
+			System.out.println("Position du bateau en X: " + positionX);
 
+			int positionY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
 			do {
-				int positionY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
 				if (positionY < 1 || positionY > tailleGrille) {
 					System.out.println("Valeur en dehors des limites de la grille !");
+					positionY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
 				}else
-					System.out.println("Position du bateau en X: " + positionY);
-				isPositionY_Ok = true;
-
+					isPositionY_Ok = true;
 			}while (!isPositionY_Ok);
+			System.out.println("Position du bateau en X: " + positionY);
+			
+			if(typeBateau != 3) {
+				int isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
+				do {
+					switch (isHorizontal) {
+					case 1:
+						System.out.println("Bateau en position horizontale !");
+						isHorizontalBool = true;
+						break;
+					case 2:
+						System.out.println("Bateau en position verticale !");
+						isHorizontalBool = false;
+					default:
+						System.out.println("Erreur ! veuillez recommencer");
+						isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
+						break;
+					}
+				}while (isHorizontal == 1 || isHorizontal == 2);
+				
+			System.out.println(isHorizontalBool);
+			}
+			
+			switch (typeBateau) {
+			case 1:
+				System.out.println("Croiseur choisi");
+				tabJoueurUn.ajouterBateau(new Croiseur(positionX, positionY, isHorizontalBool));
+				break;
+			case 2:
+				System.out.println("Escorteur choisi");
+				tabJoueurUn.ajouterBateau(new Escorteur(positionX, positionY, isHorizontalBool));
+				break;
+			case 3:
+				System.out.println("Sous-marin choisi");
+				tabJoueurUn.ajouterBateau(new SousMarin(positionX, positionY));
+				break;
+			}
 
 		}
 
