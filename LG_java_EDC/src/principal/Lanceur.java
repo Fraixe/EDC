@@ -36,20 +36,20 @@ public class Lanceur {
 			joueurDeux = "Joueur 2";
 		}
 
+		
+
+		tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\n");
+
 		do {
-
-			tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu");
-			//if (Saisie)
-
 			if (tailleGrille < TAILLEMINGRILLE)
 				System.out.println("Taille de grille trop petite ! \nTaille minimum :"+ TAILLEMINGRILLE);
-			else {
-				Tableau tabJoueurUn = new Tableau(tailleGrille, tailleGrille);
-				Tableau tabJoueurDeux = new Tableau(tailleGrille, tailleGrille);
-				System.out.println("Taille de grille définie : " + tailleGrille + " x " + tailleGrille);
+			else 
 				isTailleOK = true;
-			}
 		} while (!isTailleOK);
+			
+		Tableau tabJoueurUn = new Tableau(tailleGrille, tailleGrille);
+		Tableau tabJoueurDeux = new Tableau(tailleGrille, tailleGrille);
+		System.out.println("Taille de grille définie : " + tailleGrille + " x " + tailleGrille);
 		
 		System.out.println(tailleGrille);
 
