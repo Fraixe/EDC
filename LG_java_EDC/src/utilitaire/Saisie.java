@@ -61,6 +61,7 @@ public class Saisie {
 		return nombreReturn;
 	}
 	
+	//Vérifie que le string en paramétre est bien un entier
 	public static boolean isNumeric(String str) { 
 		  try {  
 		    Integer.parseInt(str);  
