@@ -3,6 +3,7 @@ package principal;
 import java.util.InputMismatchException;
 
 import flotte.*;
+import jeu.Partie;
 import jeu.Tableau;
 import utilitaire.Message;
 import utilitaire.Saisie;
@@ -12,9 +13,6 @@ public class Lanceur {
 	public static void main(String[] args) {
 		final int TAILLEMINGRILLE = 10;
 		final int NOMBREMINBATEAU = 3;
-
-		String joueurUn = null;
-		String joueurDeux = null;
 
 
 
@@ -26,34 +24,10 @@ public class Lanceur {
 
 		System.out.println("---------Bataille Navale------------");
 
-		joueurUn = Saisie.saisirValeurTexte("Entrez le nom du joueur 1 :");
-		joueurDeux = Saisie.saisirValeurTexte("Entrez le nom du joueur 2 :");
-
-		if (joueurUn.isEmpty()){
-			joueurUn = "Joueur 1";
-		}
-
-		if (joueurDeux.isEmpty()){
-			joueurDeux = "Joueur 2";
-		}
-
+		Partie.saisirNomJoueurs();
 		
+		Partie.definirTailleGrille();
 
-		tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\n");
-
-		do {
-			if (tailleGrille < TAILLEMINGRILLE) {
-				System.out.println("Taille de grille trop petite ! \nTaille minimum :"+ TAILLEMINGRILLE);
-				tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\n");
-			}
-			else 
-				isTailleOK = true;
-		} while (!isTailleOK);
-			
-		Tableau tabJoueurUn = new Tableau(tailleGrille, tailleGrille);
-		Tableau tabJoueurDeux = new Tableau(tailleGrille, tailleGrille);
-		System.out.println("Taille de grille définie : " + tailleGrille + " x " + tailleGrille);
-		
 		System.out.println(tailleGrille);
 
 		
@@ -132,15 +106,15 @@ public class Lanceur {
 			switch (typeBateau) {
 			case 1:
 				System.out.println("Croiseur choisi");
-				tabJoueurUn.ajouterBateau(new Croiseur(positionX, positionY, isHorizontalBool));
+		//		tabJoueurUn.ajouterBateau(new Croiseur(positionX, positionY, isHorizontalBool));
 				break;
 			case 2:
 				System.out.println("Escorteur choisi");
-				tabJoueurUn.ajouterBateau(new Escorteur(positionX, positionY, isHorizontalBool));
+		//		tabJoueurUn.ajouterBateau(new Escorteur(positionX, positionY, isHorizontalBool));
 				break;
 			case 3:
 				System.out.println("Sous-marin choisi");
-				tabJoueurUn.ajouterBateau(new SousMarin(positionX, positionY));
+		//		tabJoueurUn.ajouterBateau(new SousMarin(positionX, positionY));
 				break;
 			}
 

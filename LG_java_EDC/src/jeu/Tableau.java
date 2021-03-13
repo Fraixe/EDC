@@ -16,16 +16,11 @@ public class Tableau {
 	
 	private static Vector<Bateau> listeBateau;
 	
-	
-	
 	@SuppressWarnings("static-access")
 	public Tableau(int lignes, int colonnes) {
 		this.lignes = lignes;
 		this.colonnes = colonnes;
-		
 		setGrille(new int[lignes+1][colonnes+1]);
-
-		
 		this.listeBateau = new Vector<Bateau>();
 	}
 	
@@ -73,9 +68,7 @@ public class Tableau {
 			}
 			
 			listeBateau.add(b);
-
 			System.out.println("Bateau ajouté !");
-
 			return true;
 		} else
 			return false;
@@ -86,18 +79,16 @@ public class Tableau {
 	public  boolean enleverBateau(Bateau b) {
 		
 		if (listeBateau.contains(b)) {
-
 			listeBateau.remove(b);
 			b = null;
 			System.out.println("Bateau enlevé !");
-
 			return true;
 		}
 		System.out.println("Bateau déjà enlevé");
 		return false;
 	}
 
-	//Check si le bateau qu'on placer se superpose avec un bateau déjà placés
+	//Check si le bateau qu'on place se superpose avec un bateau déjà placés
 	private boolean isBateauSuperpose(Bateau b) {
 		int x;
 		int y;
@@ -109,7 +100,7 @@ public class Tableau {
 			if (getGrille()[x][y] == OCCUPE) {
 				System.out.println("Bateau est superposé !");
 				return false;
-			}	
+			}
 		}
 		return true;
 	}
@@ -122,7 +113,4 @@ public class Tableau {
 	public void setGrille(int[][] grille) {
 		this.grille = grille;
 	}
-
-
-	
 }

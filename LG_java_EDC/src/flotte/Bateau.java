@@ -7,11 +7,6 @@ public class Bateau {
 	private boolean bHorizontal;
 	private Element[] partieBateau = null;
 	private int compteur = 0;
-	
-	
-
-
-
 
 	public Bateau(int x, int y, boolean bhorizontal,int taille){
 		
@@ -28,17 +23,12 @@ public class Bateau {
 			else
 				this.partieBateau[i] = new Element(x+i, y, this);
 		}
-		
 	}
 	
-
-
 	public static void avancer() {
 		System.out.println("Le bateau avance");
 	}
-	
-	
-	
+
 	public int estTouche(int pX, int pY) {
 		int resultat;
 		
@@ -56,23 +46,16 @@ public class Bateau {
 				}
 				resultat = Message.COUPSURELEMENTTOUCHEPREM;
 				return resultat;
-				
 			}
 		}
-
 		resultat = Message.COUPDANSEAU;
 		return resultat;
-		
 	}
-
-
-
+	
 	// getter et setter
 	public boolean isbHorizontal() {
 		return bHorizontal;
 	}
-
-
 
 	public void setbHorizontal(boolean bHorizontal) {
 		this.bHorizontal = bHorizontal;
