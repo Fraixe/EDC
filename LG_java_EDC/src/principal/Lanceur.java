@@ -23,18 +23,17 @@ public class Lanceur {
 		boolean isHorizontalBool = false;
 
 		System.out.println("---------Bataille Navale------------");
-
-		Partie.saisirNomJoueurs();
 		
-		Partie.definirTailleGrille();
+		Partie partie = new Partie();
 
-		System.out.println(tailleGrille);
-
+		partie.saisirNomJoueurs();
 		
+		partie.definirTailleGrille();
+
+		System.out.println(partie.getTailleGrille());
+
 		System.out.println("-------------------Mise en place des bateaux-------------------");
 
-
-		
 			nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
 			
 		do {

@@ -11,7 +11,6 @@ public class Tableau {
 	
 	private static int lignes;
 	private static int colonnes;
-
 	private int[][] grille;
 	
 	private static Vector<Bateau> listeBateau;
