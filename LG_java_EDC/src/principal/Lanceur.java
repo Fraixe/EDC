@@ -31,21 +31,9 @@ public class Lanceur {
 		partie.definirTailleGrille();
 
 		System.out.println(partie.getTailleGrille());
-
-		System.out.println("-------------------Mise en place des bateaux-------------------");
-
-			nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
-			
-		do {
-			if (nombreBateau < NOMBREMINBATEAU ) {
-				System.out.println("Pas assez de bateaux !\n Nombre de bateaux minimum : "+NOMBREMINBATEAU);
-				nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
-			}else 
-				isNombreBateauOk = true;
-			
-		} while (!isNombreBateauOk);
 		
-		System.out.println("Nombre de bateaux définis pour les deux joueurs :" + nombreBateau);
+		partie.definirNombreBateau();
+
 
 		for (int i = 0; i <nombreBateau; i++) {
 			boolean isTypeBateauOk = false;
@@ -100,7 +88,8 @@ public class Lanceur {
 				}while (isHorizontal == 1 || isHorizontal == 2);
 				
 			System.out.println(isHorizontalBool);
-			}
+			} else if (typeBateau == 3)
+				
 			
 			switch (typeBateau) {
 			case 1:
@@ -121,59 +110,6 @@ public class Lanceur {
 
 		System.out.println("Bateaux placés !");
 	}
-
-
-
-
-
-
-
-
-	//Tableau tableau = new Tableau(10, 10);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//		Bateau bateau1 = new Croiseur(x, y, bhorizontal);
-
-	//		Bateau b1 = new Croiseur(2, 3, true);
-	//		
-	//		//Bateau b2 = new Escorteur(7, 3, false);
-	//		
-	//		
-	//		tableau.ajouterBateau(b1);
-	//		
-	//		
-	//		Message.obtenirMessage(tableau.effectuerCoup(2, 3));
-	//		
-	//		Message.obtenirMessage(tableau.effectuerCoup(2, 3));
-	//		Message.obtenirMessage(tableau.effectuerCoup(2, 4));
-	//		Message.obtenirMessage(tableau.effectuerCoup(2, 5));
-	//		
-	//		//Message.obtenirMessage(tableau.effectuerCoup(4, 5));
-	//		//Message.obtenirMessage(tableau.effectuerCoup(2, 3));
-	//		//Message.obtenirMessage(tableau.effectuerCoup(2, 4));
-	//		//Message.obtenirMessage(tableau.effectuerCoup(3, 3));
-	//		
-	//		//Message.obtenirMessage(0);
 
 }
 

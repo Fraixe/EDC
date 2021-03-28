@@ -72,8 +72,17 @@ public class Partie {
 		} while (!isNombreBateauOk);
 	
 	System.out.println("Nombre de bateaux définis pour les deux joueurs :" + this.nombreBateau);
-		return false;
+		return isNombreBateauOk;
 	}
+	
+	public boolean placerBateaux() {
+		
+		
+		return false;
+		
+	}
+	
+	
 
 	public int getTailleGrille() {
 		return tailleGrille;
