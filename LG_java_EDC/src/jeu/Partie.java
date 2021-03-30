@@ -1,20 +1,26 @@
 package jeu;
 
+import flotte.Croiseur;
+import flotte.Escorteur;
+import flotte.SousMarin;
 import utilitaire.Saisie;
 
 public class Partie {
 	
 	final static int TAILLEMINGRILLE = 10;
 	final static int NOMBREMINBATEAU = 3;
+	
 	private String joueurUn = null;
 	private String joueurDeux = null;
 	
 	private int tailleGrille = 0;
 	private int nombreBateau =0;
+	Tableau tabJoueurUn = null;
+	Tableau tabJoueurDeux= null;
+	boolean isHorizontalBool = false;
 	
 	
 	public Partie() {
-	
 	}
 
 	//Permets de saisir le nom des joueurs
@@ -47,8 +53,8 @@ public class Partie {
 				isTailleOK = true;
 		} while (!isTailleOK);
 			
-		Tableau tabJoueurUn = new Tableau(tailleGrille, tailleGrille);
-		Tableau tabJoueurDeux = new Tableau(tailleGrille, tailleGrille);
+		tabJoueurUn = new Tableau(tailleGrille, tailleGrille);
+		tabJoueurDeux = new Tableau(tailleGrille, tailleGrille);
 		System.out.println("Taille de grille définie : " + tailleGrille + " x " + tailleGrille);
 		
 		System.out.println(tailleGrille);
@@ -76,7 +82,44 @@ public class Partie {
 	}
 	
 	public boolean placerBateaux() {
+		InspectorSetBateau verif = new InspectorSetBateau(tailleGrille);
 		
+		for (int i = 0; i <nombreBateau; i++) {
+			
+			int typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
+			verif.checkTypeBateau(typeBateau);
+
+			int positionX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
+			verif.checkPosX(positionX);
+			System.out.println("Position du bateau en X: " + positionX);
+
+			int positionY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
+			verif.checkPosY(positionY);
+			System.out.println("Position du bateau en X: " + positionY);
+			
+			if(typeBateau != 3) {
+				isHorizontalBool = verif.checkIsHorizontal();
+				
+			System.out.println(isHorizontalBool);
+			} 
+				
+			
+			switch (typeBateau) {
+			case 1:
+				System.out.println("Croiseur choisi");
+				tabJoueurUn.ajouterBateau(new Croiseur(positionX, positionY, isHorizontalBool));
+				break;
+			case 2:
+				System.out.println("Escorteur choisi");
+				tabJoueurUn.ajouterBateau(new Escorteur(positionX, positionY, isHorizontalBool));
+				break;
+			case 3:
+				System.out.println("Sous-marin choisi");
+				tabJoueurUn.ajouterBateau(new SousMarin(positionX, positionY));
+				break;
+			}
+
+		}
 		
 		return false;
 		
