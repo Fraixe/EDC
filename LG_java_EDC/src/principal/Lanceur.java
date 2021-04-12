@@ -1,12 +1,6 @@
 package principal;
 
-import java.util.InputMismatchException;
-
-import flotte.*;
 import jeu.Partie;
-import jeu.Tableau;
-import utilitaire.Message;
-import utilitaire.Saisie;
 
 public class Lanceur {
 
@@ -24,14 +18,15 @@ public class Lanceur {
 		System.out.println(partie.getTailleGrille());
 		
 		partie.definirNombreBateau();
+		
+		partie.setTypeBateauPartie();
 
-
+		partie.definirBateauJoueur1();
+		
+		partie.definirBateauJoueur2();
 		
 
 		System.out.println("Bateaux placés !");
 	}
 
 }
-
-
-

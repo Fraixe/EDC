@@ -58,7 +58,7 @@ public class Tableau {
 
 		// Si le bateau à placer est sur un autre bateau déjà présent sur la grille
 		//On ne place pas le bateau (return false)
-		if (isBateauSuperpose(b)) {
+		if (!isBateauSuperpose(b)) {
 			for (int i = 0; i < b.getPartieBateau().length; i++) {
 				if (bHorizontal)
 					getGrille()[x][y+i] = OCCUPE;
@@ -74,6 +74,8 @@ public class Tableau {
 	}
 
 	
+	
+
 	//Quand tout les éléments du bateau sont touchés, on le retire du jeu
 	public  boolean enleverBateau(Bateau b) {
 		
@@ -88,6 +90,7 @@ public class Tableau {
 	}
 
 	//Check si le bateau qu'on place se superpose avec un bateau déjà placés
+	//Si le bateau est superposé on le supprime de la mémoire via le null
 	private boolean isBateauSuperpose(Bateau b) {
 		int x;
 		int y;
@@ -98,10 +101,11 @@ public class Tableau {
 			
 			if (getGrille()[x][y] == OCCUPE) {
 				System.out.println("Bateau est superposé !");
-				return false;
+				b = null;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	//Getter et Setter de la grille
@@ -111,5 +115,9 @@ public class Tableau {
 
 	public void setGrille(int[][] grille) {
 		this.grille = grille;
+	}
+	
+	public Vector<Bateau> getListeBateau() {
+		return listeBateau;
 	}
 }

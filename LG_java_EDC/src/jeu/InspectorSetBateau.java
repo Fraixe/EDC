@@ -9,7 +9,7 @@ import utilitaire.Saisie;
 public class InspectorSetBateau {
 	
 	private int tailleGrille;
-	private int typeBateauSaved;
+
 	
 	
 	public InspectorSetBateau(int tailleGrille) {
@@ -28,7 +28,7 @@ public class InspectorSetBateau {
 				isTypeBateauOk = true;
 		} while (!isTypeBateauOk);
 		
-		this.typeBateauSaved = typeBateau;
+
 		return typeBateau;
 	}
 	
@@ -62,25 +62,23 @@ public class InspectorSetBateau {
 	
 	public boolean checkIsHorizontal() {
 		boolean isHorizontalBool = false;
-		
-			int isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
-			do {
-				switch (isHorizontal) {
-				case 1:
-					System.out.println("Bateau en position horizontale !");
-					isHorizontalBool = true;
-					break;
-				case 2:
-					System.out.println("Bateau en position verticale !");
-					isHorizontalBool = false;
-				default:
-					System.out.println("Erreur ! veuillez recommencer");
-					isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
-					break;
-				}
-			}while (isHorizontal == 1 || isHorizontal == 2);
 
-		
+		int isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
+
+		switch (isHorizontal) {
+		case 1:
+			System.out.println("Bateau en position horizontale !");
+			isHorizontalBool = true;
+			break;
+		case 2:
+			System.out.println("Bateau en position verticale !");
+			isHorizontalBool = false;
+			break;
+		default:
+			System.out.println("Erreur ! veuillez recommencer");
+			isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
+			break;
+		}
 		return isHorizontalBool;
 	}
 
