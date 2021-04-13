@@ -87,7 +87,7 @@ public class Partie {
 
 	public List<Integer> setTypeBateauPartie(){		
 		InspectorSetBateau verif = new InspectorSetBateau(tailleGrille);
-		
+
 
 		for (int i =0; i < nombreBateau; i++) {
 			int typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
@@ -99,12 +99,14 @@ public class Partie {
 
 
 	public void definirBateauJoueur1() {
+		System.out.println(joueurUn + " positionnez vos bâteaux");
 		for(int i = 0;i < listeTypeBateau.size(); i++) {
 			definirPosBateauJoueur1(listeTypeBateau.get(i));
 		}
 	}
 
 	public void definirBateauJoueur2() {
+		System.out.println(joueurDeux+ " positionnez vos bâteaux");
 		for(int i = 0;i < listeTypeBateau.size(); i++) {
 			definirPosBateauJoueur2(listeTypeBateau.get(i));
 		}
@@ -204,11 +206,11 @@ public class Partie {
 		System.out.println("-----Debut de la partie !");
 		int compteurCoups = 0;
 		long startTime = System.nanoTime();
-		
+
 		do {
 			int coupX = Saisie.saisirValeurTexteToInt("Definissez votre coup en X");
 			int coupY = Saisie.saisirValeurTexteToInt("Definissez votre coup en Y");
-			
+
 			if (!jouerUnPlayed) {
 				System.out.println("Coup de "+ joueurUn);
 				tabJoueurUn.effectuerCoup(coupX, coupY);
@@ -221,13 +223,13 @@ public class Partie {
 				jouerUnPlayed = false;
 			}
 		} while ((tabJoueurUn.getListeBateau().size() != 0) || (tabJoueurDeux.getListeBateau().size() != 0));
-		
+
 		long endTime = System.nanoTime();
 		long tempsTotal = endTime - startTime;
-		
+
 		//Converti le temps total en secondes
 		long convert = TimeUnit.SECONDS.convert(tempsTotal, TimeUnit.NANOSECONDS);
-		
+
 		if(tabJoueurUn.getListeBateau().size() == 0) {
 			System.out.println("Partie terminée !\n");
 			System.out.println(joueurUn + "a gagné !\n");
@@ -237,11 +239,30 @@ public class Partie {
 			System.out.println(joueurDeux + " a gagné !\n");
 			System.out.println("Temps joué : " + convert + "\nNombre de coups joués : " +  compteurCoups);
 		}
-	
+
 	}
-	
-	
-	
+
+	public boolean isPartyOver() {
+		boolean isPartyOver = false;
+
+		int choix = Saisie.saisirValeurTexteToInt("Voulez-vous rejouer ? 1- OUI   2- NON");
+
+		switch (choix) {
+		case 1:
+			isPartyOver = false;
+			break;
+		case 2:
+			isPartyOver = true;
+			break;
+
+		default:
+			System.out.println("Mauvais choix !");
+			isPartyOver();
+			break;
+		}
+		return isPartyOver;
+	}
+
 	public int getTailleGrille() {
 		return tailleGrille;
 	}
