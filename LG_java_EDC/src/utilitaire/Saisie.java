@@ -8,6 +8,7 @@ public class Saisie {
 	public static int saisirValeur(String p_texte) {	
 
 		// Cr�ation d'un objet Scanner permettant la saisie au clavier
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 
 		// Affichage du texte
@@ -24,6 +25,7 @@ public class Saisie {
 	public static String saisirValeurTexte(String p_texte) {	
 
 		// Création d'un objet Scanner permettant la saisie au clavier
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 
 		// Affichage du texte
@@ -41,6 +43,7 @@ public class Saisie {
 		int nombreReturn = 0;
 
 		// Création d'un objet Scanner permettant la saisie au clavier
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 
 		// Affichage du texte

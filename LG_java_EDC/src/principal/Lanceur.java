@@ -25,8 +25,9 @@ public class Lanceur {
 		
 		partie.definirBateauJoueur2();
 		
+		partie.partieDeroulement();
 
-		System.out.println("Bateaux placés !");
+		
 	}
 
 }

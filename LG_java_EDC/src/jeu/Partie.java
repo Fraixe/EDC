@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import flotte.Croiseur;
 import flotte.Escorteur;
@@ -171,8 +172,6 @@ public class Partie {
 		return isBateauSetOk;
 	}
 
-
-
 	public boolean	placerBateauxJoueur2(int typeBateau, int positionX, int positionY) {
 		boolean isBateauSetOk = false;
 		switch (typeBateau) {
@@ -198,6 +197,51 @@ public class Partie {
 		return isBateauSetOk;
 	}
 
+	//Déroulement de la partie 2 attribut, un chrono qui mesure la durée de la partie et un compteur de coups joués
+	public void partieDeroulement() {
+		boolean jouerUnPlayed = false; // boolean servant pour définir le joueur qui doit jouer
+
+		System.out.println("-----Debut de la partie !");
+		int compteurCoups = 0;
+		long startTime = System.nanoTime();
+		
+		do {
+			int coupX = Saisie.saisirValeurTexteToInt("Definissez votre coup en X");
+			int coupY = Saisie.saisirValeurTexteToInt("Definissez votre coup en Y");
+			
+			if (!jouerUnPlayed) {
+				System.out.println("Coup de "+ joueurUn);
+				tabJoueurUn.effectuerCoup(coupX, coupY);
+				compteurCoups++;
+				jouerUnPlayed = true;
+			} else {
+				System.out.println("Coup de "+ joueurDeux);
+				tabJoueurDeux.effectuerCoup(coupX, coupY);
+				compteurCoups++;
+				jouerUnPlayed = false;
+			}
+		} while ((tabJoueurUn.getListeBateau().size() != 0) || (tabJoueurDeux.getListeBateau().size() != 0));
+		
+		long endTime = System.nanoTime();
+		long tempsTotal = endTime - startTime;
+		
+		//Converti le temps total en secondes
+		long convert = TimeUnit.SECONDS.convert(tempsTotal, TimeUnit.NANOSECONDS);
+		
+		if(tabJoueurUn.getListeBateau().size() == 0) {
+			System.out.println("Partie terminée !\n");
+			System.out.println(joueurUn + "a gagné !\n");
+			System.out.println("Temps joué : " + convert + "\n Nombre de coups joués : " +  compteurCoups);
+		} else {
+			System.out.println("Partie terminée !\n");
+			System.out.println(joueurDeux + " a gagné !\n");
+			System.out.println("Temps joué : " + convert + "\nNombre de coups joués : " +  compteurCoups);
+		}
+	
+	}
+	
+	
+	
 	public int getTailleGrille() {
 		return tailleGrille;
 	}

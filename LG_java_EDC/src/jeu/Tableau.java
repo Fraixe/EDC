@@ -13,14 +13,13 @@ public class Tableau {
 	private static int colonnes;
 	private int[][] grille;
 	
-	private static Vector<Bateau> listeBateau;
+	private static Vector<Bateau> listeBateau = new Vector<Bateau>();;
 	
 	@SuppressWarnings("static-access")
 	public Tableau(int lignes, int colonnes) {
 		this.lignes = lignes;
 		this.colonnes = colonnes;
 		setGrille(new int[lignes+1][colonnes+1]);
-		this.listeBateau = new Vector<Bateau>();
 	}
 	
 	public int effectuerCoup(int pX, int pY) {
