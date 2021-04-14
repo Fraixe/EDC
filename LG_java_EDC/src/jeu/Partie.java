@@ -60,9 +60,9 @@ public class Partie {
 	//Permets de saisir le nom des joueurs
 	public boolean saisirNomJoueurs() {
 
-		log.info(bundle.getObject("welcomeTitre"));
-		this.joueurUn = Saisie.saisirValeurTexte("Entrez le nom du joueur 1 :");
-		this.joueurDeux = Saisie.saisirValeurTexte("Entrez le nom du joueur 2 :");
+		log.info(bundle.getString("welcomeTitre"));
+		this.joueurUn = Saisie.saisirValeurTexte(bundle.getString("defNomJoueurUn"));
+		this.joueurDeux = Saisie.saisirValeurTexte(bundle.getString("defNomJoueurDeux"));
 
 		if (joueurUn.isEmpty()){
 			joueurUn = "Joueur 1";
@@ -78,7 +78,9 @@ public class Partie {
 	public boolean definirTailleGrille() {
 		boolean isTailleOK = false;
 
+		//on récupère la saisie utilisateur pour définir la taille de grille
 		tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\nTaille minimum :"+ TAILLEMINGRILLE);
+		//tant que la taille n'est pas valide on demande a l'utilisateur de la resaisir
 		do {
 			if (tailleGrille < TAILLEMINGRILLE) {
 				System.out.println("Taille de grille trop petite ! \nTaille minimum :"+ TAILLEMINGRILLE);
@@ -88,21 +90,22 @@ public class Partie {
 				isTailleOK = true;
 		} while (!isTailleOK);
 
+		//A partir de la saisie validé utilisateur on crées les 2 grilles des joueurs
 		tabJoueurUn = new Tableau(tailleGrille, tailleGrille);
 		tabJoueurDeux = new Tableau(tailleGrille, tailleGrille);
-		System.out.println("Taille de grille définie : " + tailleGrille + " x " + tailleGrille);
+		log.info("Taille de grille définie : " + tailleGrille + " x " + tailleGrille);
 		return true;
 	}
 
 	//Méthode donnant le nombre de Bateau pour les deux joueurs
 	public boolean definirNombreBateau() {
-		System.out.println("-------------------Mise en place des bateaux-------------------");
+		log.info("-------------------Mise en place des bateaux-------------------");
 		this.nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
 
 		boolean isNombreBateauOk = false;
 		do {
 			if (nombreBateau < NOMBREMINBATEAU ) {
-				System.out.println("Pas assez de bateaux !\n Nombre de bateaux minimum : "+NOMBREMINBATEAU);
+				log.info("Pas assez de bateaux !\n Nombre de bateaux minimum : "+NOMBREMINBATEAU);
 				this.nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
 			}else 
 				isNombreBateauOk = true;
@@ -232,7 +235,7 @@ public class Partie {
 	public void partieDeroulement() {
 		boolean jouerUnPlayed = false; // boolean servant pour définir le joueur qui doit jouer
 
-		System.out.println("-----Debut de la partie !");
+		log.info("-----Debut de la partie !");
 		int compteurCoups = 0;
 		long startTime = System.nanoTime();
 
@@ -260,13 +263,13 @@ public class Partie {
 		long convert = TimeUnit.SECONDS.convert(tempsTotal, TimeUnit.NANOSECONDS);
 
 		if(tabJoueurUn.getListeBateau().size() == 0) {
-			System.out.println("Partie terminée !\n");
-			System.out.println(joueurUn + "a gagné !\n");
-			System.out.println("Temps joué : " + convert + "\n Nombre de coups joués : " +  compteurCoups);
+			log.info("Partie terminée !\n");
+			log.info(joueurUn + "a gagné !\n");
+			log.info("Temps joué : " + convert + "\n Nombre de coups joués : " +  compteurCoups);
 		} else {
-			System.out.println("Partie terminée !\n");
-			System.out.println(joueurDeux + " a gagné !\n");
-			System.out.println("Temps joué : " + convert + "\nNombre de coups joués : " +  compteurCoups);
+			log.info("Partie terminée !\n");
+			log.info(joueurDeux + " a gagné !\n");
+			log.info("Temps joué : " + convert +" secondes"+ "\nNombre de coups joués : " +  compteurCoups);
 		}
 
 	}
