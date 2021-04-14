@@ -71,7 +71,6 @@ public class Tableau {
 			}
 			
 			listeBateau.add(b);
-			log.info("Bateau ajouté !");
 			return true;
 		} else
 			return false;
@@ -86,10 +85,8 @@ public class Tableau {
 		if (listeBateau.contains(b)) {
 			listeBateau.remove(b);
 			b = null;
-			log.info("Bateau enlevé !");
 			return true;
 		}
-		log.info("Bateau déjà enlevé");
 		return false;
 	}
 
@@ -104,7 +101,7 @@ public class Tableau {
 			y =	b.getPartieBateau()[i].getPositionY();
 			
 			if (getGrille()[x][y] == OCCUPE) {
-				log.info("Bateau est superposé !");
+				log.info(Partie.getBundle().getString("erreurBateeauSuperpose"));
 				b = null;
 				return true;
 			}

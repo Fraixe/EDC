@@ -24,9 +24,9 @@ public class InspectorSetBateau {
 		boolean isTypeBateauOk = false;
 		
 		do {
-			if (typeBateau < 1 && typeBateau > 3) {
-				log.info("Valeur incorrecte ! Veuillez choisir entre 1 et 3");
-				typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
+			if (typeBateau < 1 && typeBateau > 4) {
+				log.info(Partie.getBundle().getString("erreurcheckTypeBateau"));
+				typeBateau = Saisie.saisirValeurTexteToInt(Partie.getBundle().getString("choixBateau"));
 			}else 
 				isTypeBateauOk = true;
 		} while (!isTypeBateauOk);
@@ -40,8 +40,8 @@ public class InspectorSetBateau {
 		
 		do {
 			if (posX < 1 || posX > tailleGrille) {
-				log.info("Valeur en dehors des limites de la grille !");
-				posX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
+				log.info(Partie.getBundle().getString("erreurCheckPos"));
+				posX = Saisie.saisirValeurTexteToInt(Partie.getBundle().getString("setPositionX"));
 			}else
 				isPositionX_Ok = true;
 		}while (!isPositionX_Ok);
@@ -54,8 +54,8 @@ public class InspectorSetBateau {
 		
 		do {
 			if (posY < 1 || posY > tailleGrille) {
-				log.info("Valeur en dehors des limites de la grille !");
-				posY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
+				log.info(Partie.getBundle().getString("erreurCheckPos"));
+				posY = Saisie.saisirValeurTexteToInt(Partie.getBundle().getString("setPositionY"));
 			}else
 				isPositionY_Ok = true;
 		}while (!isPositionY_Ok);
@@ -66,20 +66,20 @@ public class InspectorSetBateau {
 	public boolean checkIsHorizontal() {
 		boolean isHorizontalBool = false;
 
-		int isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
+		int isHorizontal = Saisie.saisirValeurTexteToInt(Partie.getBundle().getString("setCheckIsHorizontal"));
 
 		switch (isHorizontal) {
 		case 1:
-			log.info("Bateau en position horizontale !");
+			log.info(Partie.getBundle().getString("bateauHoriz"));
 			isHorizontalBool = true;
 			break;
 		case 2:
-			log.info("Bateau en position verticale !");
+			log.info(Partie.getBundle().getString("bateauVertical"));
 			isHorizontalBool = false;
 			break;
 		default:
-			log.info("Erreur ! veuillez recommencer");
-			isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
+			log.info(Partie.getBundle().getString("erreurCheckIsHorizontal"));
+			isHorizontal = Saisie.saisirValeurTexteToInt(Partie.getBundle().getString("setCheckIsHorizontal"));
 			break;
 		}
 		return isHorizontalBool;

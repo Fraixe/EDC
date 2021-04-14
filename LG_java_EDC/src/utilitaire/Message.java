@@ -1,5 +1,7 @@
 package utilitaire;
 
+import jeu.Partie;
+
 public class Message {
 
 	public static final int COUPENDEHORSDUTABLEAU = -1;
@@ -17,25 +19,24 @@ public class Message {
 
 		String retourPhrase = null;
 
-
 		switch (numero) {
 		case COUPENDEHORSDUTABLEAU:
-			retourPhrase = ("Le coup joué est en dehors du tableau");
+			retourPhrase = (Partie.getBundle().getString("COUPENDEHORSDUTABLEAU"));
 			break;
 		case COUPDANSEAU:
-			retourPhrase = ("Dans l'eau !");
+			retourPhrase = (Partie.getBundle().getString("COUPDANSEAU"));
 			break;
 		case COUPSURELEMENTTOUCHE:
-			retourPhrase = ("Element déjà touché !");
+			retourPhrase = (Partie.getBundle().getString("COUPSURELEMENTTOUCHE"));
 			break;
 		case COUPSURELEMENTTOUCHEPREM:
-			retourPhrase = ("Bateau touché !");
+			retourPhrase = (Partie.getBundle().getString("COUPSURELEMENTTOUCHEPREM"));
 			break;
 		case COUPSURBATEAUCOULE:
-			retourPhrase = ("Bateau touché et coulé !");
+			retourPhrase = (Partie.getBundle().getString("COUPSURBATEAUCOULE"));
 			break;
 		default:
-			retourPhrase = ("Cassé");
+			retourPhrase = (Partie.getBundle().getString("casse"));
 			
 		}
 

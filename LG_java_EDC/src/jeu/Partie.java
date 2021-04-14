@@ -11,16 +11,21 @@ import org.apache.log4j.Logger;
 
 import flotte.Croiseur;
 import flotte.Escorteur;
+import flotte.PorteAvion;
 import flotte.SousMarin;
+import utilitaire.Message;
 import utilitaire.Saisie;
 
+/**
+ * @author Lucas
+ *
+ */
 public class Partie {
 
 	Logger log = Logger.getLogger(Partie.class);
 	
 	static ResourceBundle.Control rbc = ResourceBundle.Control.getControl(Control.FORMAT_DEFAULT);
-
-	static ResourceBundle bundle;
+	private static ResourceBundle bundle;
 	
 	final static int TAILLEMINGRILLE = 10;
 	final static int NOMBREMINBATEAU = 3;
@@ -40,6 +45,7 @@ public class Partie {
 	public Partie() {
 	}
 
+	//Méthode servant a selectionner la langue du jeu
 	public void selectLangue() {
 		int choixLangue = Saisie.saisirValeurTexteToInt("En quelle langue voulez-vous jouer?\n1-Français   2-Anglais");
 		
@@ -79,12 +85,12 @@ public class Partie {
 		boolean isTailleOK = false;
 
 		//on récupère la saisie utilisateur pour définir la taille de grille
-		tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\nTaille minimum :"+ TAILLEMINGRILLE);
+		tailleGrille = Saisie.saisirValeurTexteToInt(bundle.getString("tailleDefGrille")+bundle.getString("minGrille")+ TAILLEMINGRILLE);
 		//tant que la taille n'est pas valide on demande a l'utilisateur de la resaisir
 		do {
 			if (tailleGrille < TAILLEMINGRILLE) {
-				System.out.println("Taille de grille trop petite ! \nTaille minimum :"+ TAILLEMINGRILLE);
-				tailleGrille = Saisie.saisirValeurTexteToInt("Veuillez définir la taille de la grille de jeu\nTaille minimum :"+ TAILLEMINGRILLE);
+				System.out.println(bundle.getString("erreurTaille") + bundle.getString("minGrille")+ TAILLEMINGRILLE);
+				tailleGrille = Saisie.saisirValeurTexteToInt(bundle.getString("tailleDefGrille")+bundle.getString("minGrille")+ TAILLEMINGRILLE);
 			}
 			else 
 				isTailleOK = true;
@@ -93,26 +99,26 @@ public class Partie {
 		//A partir de la saisie validé utilisateur on crées les 2 grilles des joueurs
 		tabJoueurUn = new Tableau(tailleGrille, tailleGrille);
 		tabJoueurDeux = new Tableau(tailleGrille, tailleGrille);
-		log.info("Taille de grille définie : " + tailleGrille + " x " + tailleGrille);
+		log.info(bundle.getString("tailleDefinie") + tailleGrille + " x " + tailleGrille);
 		return true;
 	}
 
 	//Méthode donnant le nombre de Bateau pour les deux joueurs
 	public boolean definirNombreBateau() {
-		log.info("-------------------Mise en place des bateaux-------------------");
-		this.nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
+		log.info(bundle.getString("miseEnPlaceTitre"));
+		this.nombreBateau = Saisie.saisirValeurTexteToInt(bundle.getString("defNbBateaux"));
 
 		boolean isNombreBateauOk = false;
 		do {
 			if (nombreBateau < NOMBREMINBATEAU ) {
-				log.info("Pas assez de bateaux !\n Nombre de bateaux minimum : "+NOMBREMINBATEAU);
-				this.nombreBateau = Saisie.saisirValeurTexteToInt("Veuillez définir un nombre de bateaux pour les deux joueurs");
+				log.info(bundle.getString("erreurNbBateaux")+NOMBREMINBATEAU);
+				this.nombreBateau = Saisie.saisirValeurTexteToInt(bundle.getString("defNbBateaux"));
 			}else 
 				isNombreBateauOk = true;
 
 		} while (!isNombreBateauOk);
 
-		System.out.println("Nombre de bateaux définis pour les deux joueurs :" + this.nombreBateau);
+		System.out.println(bundle.getString("nbBateauxDef") + this.nombreBateau);
 		return isNombreBateauOk;
 	}
 
@@ -122,7 +128,7 @@ public class Partie {
 
 
 		for (int i =0; i < nombreBateau; i++) {
-			int typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
+			int typeBateau = Saisie.saisirValeurTexteToInt(bundle.getString("choixBateau"));
 			verif.checkTypeBateau(typeBateau);
 			listeTypeBateau.add(typeBateau);
 		}
@@ -131,14 +137,14 @@ public class Partie {
 
 
 	public void definirBateauJoueur1() {
-		System.out.println(joueurUn + " positionnez vos bâteaux");
+		log.info(joueurUn + bundle.getString("defPosBateau"));
 		for(int i = 0;i < listeTypeBateau.size(); i++) {
 			definirPosBateauJoueur1(listeTypeBateau.get(i));
 		}
 	}
 
 	public void definirBateauJoueur2() {
-		System.out.println(joueurDeux+ " positionnez vos bâteaux");
+		log.info(joueurDeux+ bundle.getString("defPosBateau"));
 		for(int i = 0;i < listeTypeBateau.size(); i++) {
 			definirPosBateauJoueur2(listeTypeBateau.get(i));
 		}
@@ -148,11 +154,11 @@ public class Partie {
 	public void definirPosBateauJoueur1(int typeBateau) {
 		InspectorSetBateau verif = new InspectorSetBateau(tailleGrille);
 
-		int positionX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
+		int positionX = Saisie.saisirValeurTexteToInt(bundle.getString("setPositionX"));
 		verif.checkPosX(positionX);
 
 
-		int positionY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
+		int positionY = Saisie.saisirValeurTexteToInt(bundle.getString("setPositionY"));
 		verif.checkPosY(positionY);
 
 		if(typeBateau != 3) 
@@ -160,17 +166,16 @@ public class Partie {
 
 
 		placerBateauxJoueur1(typeBateau, positionX, positionY);
-
 	}
 
 	public void definirPosBateauJoueur2(int typeBateau) {
 		InspectorSetBateau verif = new InspectorSetBateau(tailleGrille);
 
-		int positionX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
+		int positionX = Saisie.saisirValeurTexteToInt(bundle.getString("setPositionX"));
 		verif.checkPosX(positionX);
 
 
-		int positionY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
+		int positionY = Saisie.saisirValeurTexteToInt(bundle.getString("setPositionY"));
 		verif.checkPosY(positionY);
 
 		if(typeBateau != 3) 
@@ -202,6 +207,11 @@ public class Partie {
 			if (!isBateauSetOk)
 				definirPosBateauJoueur1(typeBateau);
 			break;
+		case 4:
+			isBateauSetOk =tabJoueurUn.ajouterBateau(new PorteAvion(positionX, positionY, isHorizontalBool));
+			if (!isBateauSetOk)
+				definirPosBateauJoueur1(typeBateau);
+			break;
 		}
 		return isBateauSetOk;
 	}
@@ -227,6 +237,11 @@ public class Partie {
 			if (!isBateauSetOk)
 				definirPosBateauJoueur2(typeBateau);
 			break;
+		case 4:
+			isBateauSetOk =tabJoueurUn.ajouterBateau(new PorteAvion(positionX, positionY, isHorizontalBool));
+			if (!isBateauSetOk)
+				definirPosBateauJoueur1(typeBateau);
+			break;
 		}
 		return isBateauSetOk;
 	}
@@ -235,22 +250,22 @@ public class Partie {
 	public void partieDeroulement() {
 		boolean jouerUnPlayed = false; // boolean servant pour définir le joueur qui doit jouer
 
-		log.info("-----Debut de la partie !");
+		log.info(bundle.getString("startParty"));
 		int compteurCoups = 0;
 		long startTime = System.nanoTime();
 
 		do {
-			int coupX = Saisie.saisirValeurTexteToInt("Definissez votre coup en X");
-			int coupY = Saisie.saisirValeurTexteToInt("Definissez votre coup en Y");
+			int coupX = Saisie.saisirValeurTexteToInt(bundle.getString("coupEnX"));
+			int coupY = Saisie.saisirValeurTexteToInt(bundle.getString("coupEnY"));
 
 			if (!jouerUnPlayed) {
-				System.out.println("Coup de "+ joueurUn);
-				tabJoueurUn.effectuerCoup(coupX, coupY);
+				log.info(bundle.getString("coupDe")+ joueurUn);
+				Message.obtenirMessage(tabJoueurUn.effectuerCoup(coupX, coupY));
 				compteurCoups++;
 				jouerUnPlayed = true;
 			} else {
-				System.out.println("Coup de "+ joueurDeux);
-				tabJoueurDeux.effectuerCoup(coupX, coupY);
+				log.info(bundle.getString("coupDe")+ joueurDeux);
+				Message.obtenirMessage(tabJoueurDeux.effectuerCoup(coupX, coupY));
 				compteurCoups++;
 				jouerUnPlayed = false;
 			}
@@ -263,13 +278,13 @@ public class Partie {
 		long convert = TimeUnit.SECONDS.convert(tempsTotal, TimeUnit.NANOSECONDS);
 
 		if(tabJoueurUn.getListeBateau().size() == 0) {
-			log.info("Partie terminée !\n");
-			log.info(joueurUn + "a gagné !\n");
-			log.info("Temps joué : " + convert + "\n Nombre de coups joués : " +  compteurCoups);
+			log.info(bundle.getString("partyOver"));
+			log.info(joueurUn + bundle.getString("aWin"));
+			log.info(bundle.getString("tempsJoue") + convert + bundle.getString("secondes") + bundle.getString("NbCoupJoue") + compteurCoups);
 		} else {
-			log.info("Partie terminée !\n");
-			log.info(joueurDeux + " a gagné !\n");
-			log.info("Temps joué : " + convert +" secondes"+ "\nNombre de coups joués : " +  compteurCoups);
+			log.info(bundle.getString("partyOver"));
+			log.info(joueurDeux + bundle.getString("aWin"));
+			log.info(bundle.getString("tempsJoue") + convert +bundle.getString("secondes")+ bundle.getString("NbCoupJoue") +  compteurCoups);
 		}
 
 	}
@@ -277,7 +292,7 @@ public class Partie {
 	public boolean isPartyOver() {
 		boolean isPartyOver = false;
 
-		int choix = Saisie.saisirValeurTexteToInt("Voulez-vous rejouer ? 1- OUI   2- NON");
+		int choix = Saisie.saisirValeurTexteToInt(bundle.getString("replay"));
 
 		switch (choix) {
 		case 1:
@@ -289,7 +304,7 @@ public class Partie {
 			break;
 
 		default:
-			System.out.println("Mauvais choix !");
+			log.info(bundle.getString("mauvaixChoix"));
 			isPartyOver();
 			break;
 		}
@@ -299,5 +314,10 @@ public class Partie {
 	public int getTailleGrille() {
 		return tailleGrille;
 	}
+
+	public static ResourceBundle getBundle() {
+		return bundle;
+	}
+
 
 }

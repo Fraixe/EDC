@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+import jeu.Partie;
+
 public class Saisie {
 	
 	static Logger log = Logger.getLogger(Saisie.class);
@@ -59,7 +61,7 @@ public class Saisie {
 		String texteEntree = sc.nextLine();
 		
 		if(!isNumeric(texteEntree)) {
-			log.info("Erreur ! nombre attendu");
+			log.info(Partie.getBundle().getString("erreurSaisie"));
 			saisirValeurTexteToInt(p_texte);
 		}
 		else

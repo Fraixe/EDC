@@ -4,6 +4,10 @@ import org.apache.log4j.Logger;
 
 import utilitaire.Message;
 
+/**
+ * @author Lucas
+ *Classe définissant un élément, un bateau est constitué d'un ou plusieurs élément qui a ses propres coordonnées
+ */
 public class Element {
 	Logger log = Logger.getLogger(Element.class);
 
@@ -19,7 +23,6 @@ public class Element {
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.bateau = bateau;
-		log.info("Element crée en " + positionX + "," + positionY +"  pour le bateau : "+ bateau);
 	}
 	
 	public int estTouche(int pX,int pY) {
