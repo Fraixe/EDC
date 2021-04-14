@@ -108,6 +108,7 @@ public class Partie {
 		log.info(bundle.getString("miseEnPlaceTitre"));
 		this.nombreBateau = Saisie.saisirValeurTexteToInt(bundle.getString("defNbBateaux"));
 
+		//Tant que le nombre est inferieur au nombre min de bateaux, on continu a demander
 		boolean isNombreBateauOk = false;
 		do {
 			if (nombreBateau < NOMBREMINBATEAU ) {
@@ -122,7 +123,7 @@ public class Partie {
 		return isNombreBateauOk;
 	}
 
-
+	//Les joueurs definissent au début les bateaux avec ils vont jouer
 	public List<Integer> setTypeBateauPartie(){		
 		InspectorSetBateau verif = new InspectorSetBateau(tailleGrille);
 
@@ -135,14 +136,15 @@ public class Partie {
 		return listeTypeBateau;
 	}
 
-
+	//Méthode qui fait une boucle pour mettre en place les bateaux définis auparavant pour le joueur1
 	public void definirBateauJoueur1() {
 		log.info(joueurUn + bundle.getString("defPosBateau"));
 		for(int i = 0;i < listeTypeBateau.size(); i++) {
 			definirPosBateauJoueur1(listeTypeBateau.get(i));
 		}
 	}
-
+	
+ // même méthode mais pour le joueur 2
 	public void definirBateauJoueur2() {
 		log.info(joueurDeux+ bundle.getString("defPosBateau"));
 		for(int i = 0;i < listeTypeBateau.size(); i++) {
@@ -151,23 +153,27 @@ public class Partie {
 	}
 
 
+	//permets de définir la position du premier element du bateau et sa position (vertical/horizontal)
 	public void definirPosBateauJoueur1(int typeBateau) {
+		//on instancie un inspecteur qui nous aidera a vérifier la saisie utilisateur
 		InspectorSetBateau verif = new InspectorSetBateau(tailleGrille);
 
+		//saisie position en X
 		int positionX = Saisie.saisirValeurTexteToInt(bundle.getString("setPositionX"));
 		verif.checkPosX(positionX);
 
-
+		//saisie position en Y
 		int positionY = Saisie.saisirValeurTexteToInt(bundle.getString("setPositionY"));
 		verif.checkPosY(positionY);
 
+		//Si le bateau choisi est un sousmarin, on ne vérifie pas sa position
 		if(typeBateau != 3) 
 			isHorizontalBool = verif.checkIsHorizontal();
 
-
+		//on appelle placerBateauxJoueur pour mettre en place le bateau
 		placerBateauxJoueur1(typeBateau, positionX, positionY);
 	}
-
+	//meme methode mais pour le joueur2
 	public void definirPosBateauJoueur2(int typeBateau) {
 		InspectorSetBateau verif = new InspectorSetBateau(tailleGrille);
 
@@ -185,7 +191,7 @@ public class Partie {
 		placerBateauxJoueur2(typeBateau, positionX, positionY);
 	}
 
-
+ //méthode mettant en place le bateau sur la grille joueur, si ça ne fonctionnne pas, on rappelle la méthode definirPosBateauJoueur pour redéfinir les positions
 	public boolean	placerBateauxJoueur1(int typeBateau, int positionX, int positionY) {
 		boolean isBateauSetOk = false;
 		switch (typeBateau) {
@@ -216,6 +222,7 @@ public class Partie {
 		return isBateauSetOk;
 	}
 
+	//meme methode mais pour le joueur2
 	public boolean	placerBateauxJoueur2(int typeBateau, int positionX, int positionY) {
 		boolean isBateauSetOk = false;
 		switch (typeBateau) {
@@ -252,7 +259,7 @@ public class Partie {
 
 		log.info(bundle.getString("startParty"));
 		int compteurCoups = 0;
-		long startTime = System.nanoTime();
+		long startTime = System.nanoTime(); //démarrage du compteur
 
 		do {
 			int coupX = Saisie.saisirValeurTexteToInt(bundle.getString("coupEnX"));
@@ -271,8 +278,8 @@ public class Partie {
 			}
 		} while ((tabJoueurUn.getListeBateau().size() != 0) || (tabJoueurDeux.getListeBateau().size() != 0));
 
-		long endTime = System.nanoTime();
-		long tempsTotal = endTime - startTime;
+		long endTime = System.nanoTime(); //marque la fin de la partie
+		long tempsTotal = endTime - startTime; //calcul du temps de la partie
 
 		//Converti le temps total en secondes
 		long convert = TimeUnit.SECONDS.convert(tempsTotal, TimeUnit.NANOSECONDS);
@@ -289,6 +296,7 @@ public class Partie {
 
 	}
 
+	//méthode renvoyant un booleen qui permets de savoir si les joueurs veulent rejouer ou pas
 	public boolean isPartyOver() {
 		boolean isPartyOver = false;
 
@@ -311,10 +319,12 @@ public class Partie {
 		return isPartyOver;
 	}
 
+	//getter de la taille de grille
 	public int getTailleGrille() {
 		return tailleGrille;
 	}
 
+	//getter du bundle pour l'internationalisation de l'application
 	public static ResourceBundle getBundle() {
 		return bundle;
 	}
