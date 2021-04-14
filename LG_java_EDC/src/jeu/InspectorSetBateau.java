@@ -1,5 +1,7 @@
 package jeu;
 
+import org.apache.log4j.Logger;
+
 import utilitaire.Saisie;
 
 /**
@@ -7,6 +9,7 @@ import utilitaire.Saisie;
  *Classe répertoriant tout les controles lors du déroulement d'une partie
  */
 public class InspectorSetBateau {
+	Logger log = Logger.getLogger(InspectorSetBateau.class);
 	
 	private int tailleGrille;
 
@@ -22,7 +25,7 @@ public class InspectorSetBateau {
 		
 		do {
 			if (typeBateau < 1 && typeBateau > 3) {
-				System.out.println("Valeur incorrecte ! Veuillez choisir entre 1 et 3");
+				log.info("Valeur incorrecte ! Veuillez choisir entre 1 et 3");
 				typeBateau = Saisie.saisirValeurTexteToInt("Quel bateau voulez-vous créer ?\n 1- Croiseur  2- Escorteur  3- Sous-Marin");
 			}else 
 				isTypeBateauOk = true;
@@ -37,7 +40,7 @@ public class InspectorSetBateau {
 		
 		do {
 			if (posX < 1 || posX > tailleGrille) {
-				System.out.println("Valeur en dehors des limites de la grille !");
+				log.info("Valeur en dehors des limites de la grille !");
 				posX = Saisie.saisirValeurTexteToInt("Veillez définir ça position en X");
 			}else
 				isPositionX_Ok = true;
@@ -51,7 +54,7 @@ public class InspectorSetBateau {
 		
 		do {
 			if (posY < 1 || posY > tailleGrille) {
-				System.out.println("Valeur en dehors des limites de la grille !");
+				log.info("Valeur en dehors des limites de la grille !");
 				posY = Saisie.saisirValeurTexteToInt("Veillez définir ça position en Y");
 			}else
 				isPositionY_Ok = true;
@@ -67,15 +70,15 @@ public class InspectorSetBateau {
 
 		switch (isHorizontal) {
 		case 1:
-			System.out.println("Bateau en position horizontale !");
+			log.info("Bateau en position horizontale !");
 			isHorizontalBool = true;
 			break;
 		case 2:
-			System.out.println("Bateau en position verticale !");
+			log.info("Bateau en position verticale !");
 			isHorizontalBool = false;
 			break;
 		default:
-			System.out.println("Erreur ! veuillez recommencer");
+			log.info("Erreur ! veuillez recommencer");
 			isHorizontal = Saisie.saisirValeurTexteToInt("Définissez sa position\n Horizontal : 1 --- Vertical : 2");
 			break;
 		}

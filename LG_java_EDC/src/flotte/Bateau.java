@@ -1,8 +1,12 @@
 package flotte;
 
+import org.apache.log4j.Logger;
+
 import utilitaire.Message;
 
 public class Bateau {
+	
+	Logger log = Logger.getLogger(Bateau.class);
 	
 	private boolean bHorizontal;
 	private Element[] partieBateau = null;

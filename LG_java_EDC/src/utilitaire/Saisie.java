@@ -2,7 +2,11 @@ package utilitaire;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class Saisie {
+	
+	static Logger log = Logger.getLogger(Saisie.class);
 
 	// Retourner une valeur saisie
 	public static int saisirValeur(String p_texte) {	
@@ -12,7 +16,8 @@ public class Saisie {
 		Scanner sc = new Scanner(System.in);
 
 		// Affichage du texte
-		System.out.print("\n" + p_texte);
+		log.info("\n" + p_texte);
+		
 
 		// Attendre la saisie et stocker la valeur dans valeurEntree
 		int valeurEntree = sc.nextInt();
@@ -24,12 +29,13 @@ public class Saisie {
 	
 	public static String saisirValeurTexte(String p_texte) {	
 
+		
 		// Création d'un objet Scanner permettant la saisie au clavier
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 
 		// Affichage du texte
-		System.out.print("\n" + p_texte);
+		log.info("\n" + p_texte);
 
 		// Attendre la saisie et stocker la valeur dans valeurEntree
 		String texteEntree = sc.nextLine();
@@ -47,13 +53,13 @@ public class Saisie {
 		Scanner sc = new Scanner(System.in);
 
 		// Affichage du texte
-		System.out.print("\n" + p_texte);
+		log.info("\n" + p_texte);
 
 		// Attendre la saisie et stocker la valeur dans valeurEntree
 		String texteEntree = sc.nextLine();
 		
 		if(!isNumeric(texteEntree)) {
-			System.out.println("Erreur ! nombre attendu");
+			log.info("Erreur ! nombre attendu");
 			saisirValeurTexteToInt(p_texte);
 		}
 		else

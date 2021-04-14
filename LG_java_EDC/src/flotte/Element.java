@@ -1,8 +1,11 @@
 package flotte;
 
+import org.apache.log4j.Logger;
+
 import utilitaire.Message;
 
 public class Element {
+	Logger log = Logger.getLogger(Element.class);
 
 	private int positionX;
 	private int positionY;
@@ -16,7 +19,7 @@ public class Element {
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.bateau = bateau;
-		System.out.println("Element crée en " + positionX + "," + positionY +"  pour le bateau : "+ bateau);
+		log.info("Element crée en " + positionX + "," + positionY +"  pour le bateau : "+ bateau);
 	}
 	
 	public int estTouche(int pX,int pY) {
@@ -33,9 +36,7 @@ public class Element {
 		resultat = Message.COUPDANSEAU;
 		return resultat ;
 	}
-	
-	
-	
+
 	public  void avancer(int depX, int depY) {
 		 
 	}

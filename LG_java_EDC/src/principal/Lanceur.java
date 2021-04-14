@@ -11,17 +11,13 @@ public class Lanceur {
 	public static void main(String[] args) {
 	
 		boolean isPartieOver = false;
-		ResourceBundle.Control rbc = ResourceBundle.Control.getControl(Control.FORMAT_DEFAULT);
-
-		ResourceBundle bundle = ResourceBundle.getBundle("textes", Locale.FRANCE,rbc);
 		
-		
-		
+	
 		do {
-		System.out.println("---------Bataille Navale------------");
 		
 		Partie partie = new Partie();
 
+		partie.selectLangue();
 		partie.saisirNomJoueurs();
 		
 		partie.definirTailleGrille();
@@ -41,6 +37,7 @@ public class Lanceur {
 		isPartieOver = partie.isPartyOver();
 		
 		} while (!isPartieOver);
+		
 	}
 
 }

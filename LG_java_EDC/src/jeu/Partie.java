@@ -2,7 +2,12 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.ResourceBundle.Control;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
 
 import flotte.Croiseur;
 import flotte.Escorteur;
@@ -11,6 +16,12 @@ import utilitaire.Saisie;
 
 public class Partie {
 
+	Logger log = Logger.getLogger(Partie.class);
+	
+	static ResourceBundle.Control rbc = ResourceBundle.Control.getControl(Control.FORMAT_DEFAULT);
+
+	static ResourceBundle bundle;
+	
 	final static int TAILLEMINGRILLE = 10;
 	final static int NOMBREMINBATEAU = 3;
 
@@ -29,9 +40,27 @@ public class Partie {
 	public Partie() {
 	}
 
+	public void selectLangue() {
+		int choixLangue = Saisie.saisirValeurTexteToInt("En quelle langue voulez-vous jouer?\n1-Français   2-Anglais");
+		
+		switch (choixLangue) {
+		case 1:
+			bundle = ResourceBundle.getBundle("textes", Locale.FRENCH, rbc);
+			break;
+		case 2:
+			bundle = ResourceBundle.getBundle("textes", Locale.UK, rbc);
+			break;
+			
+		default:
+			selectLangue();
+			break;
+		}
+	}
+	
 	//Permets de saisir le nom des joueurs
 	public boolean saisirNomJoueurs() {
 
+		log.info(bundle.getObject("welcomeTitre"));
 		this.joueurUn = Saisie.saisirValeurTexte("Entrez le nom du joueur 1 :");
 		this.joueurDeux = Saisie.saisirValeurTexte("Entrez le nom du joueur 2 :");
 
@@ -253,6 +282,7 @@ public class Partie {
 			break;
 		case 2:
 			isPartyOver = true;
+			
 			break;
 
 		default:

@@ -6,6 +6,6 @@ public class Escorteur  extends Bateau{
 	
 	public Escorteur(int x, int y, boolean bhorizontal) {
 		super(x, y, bhorizontal, NBELEMENTS);
-		System.out.println("Escorteur crée !");
+		log.info("Escorteur crée !");
 	}
 }

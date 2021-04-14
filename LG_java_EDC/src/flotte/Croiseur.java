@@ -6,7 +6,7 @@ public class Croiseur extends Bateau{
 
 	public Croiseur(int x, int y, boolean bhorizontal) {
 		super(x, y, bhorizontal, NBELEMENTS);
-		System.out.println("Croiseur créée !");
+		log.info("Croiseur créée !");
 	}
 
 }

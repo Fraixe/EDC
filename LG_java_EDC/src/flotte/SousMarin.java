@@ -16,7 +16,7 @@ public class SousMarin extends Bateau{
 	
 	public SousMarin(int x, int y) {
 		super(x, y, true, NBELEMENTS);
-		System.out.println("Sous-marin crée !");
+		log.info("Sous-marin crée !");
 	}
 
 	

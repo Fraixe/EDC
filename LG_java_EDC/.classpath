@@ -4,5 +4,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="ressouces"/>
+	<classpathentry kind="src" path="librairies"/>
+	<classpathentry kind="lib" path="librairies/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="librairies/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

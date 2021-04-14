@@ -2,11 +2,16 @@ package jeu;
 
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import flotte.*;
 import utilitaire.Message;
 
 
 public class Tableau {
+	
+	Logger log = Logger.getLogger(Tableau.class);
+	
 	static final int OCCUPE = 1;
 	
 	private static int lignes;
@@ -66,7 +71,7 @@ public class Tableau {
 			}
 			
 			listeBateau.add(b);
-			System.out.println("Bateau ajouté !");
+			log.info("Bateau ajouté !");
 			return true;
 		} else
 			return false;
@@ -81,10 +86,10 @@ public class Tableau {
 		if (listeBateau.contains(b)) {
 			listeBateau.remove(b);
 			b = null;
-			System.out.println("Bateau enlevé !");
+			log.info("Bateau enlevé !");
 			return true;
 		}
-		System.out.println("Bateau déjà enlevé");
+		log.info("Bateau déjà enlevé");
 		return false;
 	}
 
@@ -99,7 +104,7 @@ public class Tableau {
 			y =	b.getPartieBateau()[i].getPositionY();
 			
 			if (getGrille()[x][y] == OCCUPE) {
-				System.out.println("Bateau est superposé !");
+				log.info("Bateau est superposé !");
 				b = null;
 				return true;
 			}
